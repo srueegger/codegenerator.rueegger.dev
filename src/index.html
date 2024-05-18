@@ -18,7 +18,7 @@
       <form id="codeGeneratorForm" class="row g-3" method="post" action="">
         <div class="col-12">
           <label for="codePattern" class="form-label">Choose a code pattern</label>
-          <select id="codePattern" class="form-select" aria-label="Code Pattern" required>
+          <select id="codePattern" name="codePattern" class="form-select" aria-label="Code Pattern" required>
             <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">A-Z</option>
             <option value="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ">A-Z 0-9</option>
             <option value="0123456789">0-9</option>
@@ -30,11 +30,11 @@
         </div>
         <div class="col-6">
           <label for="codeLength" class="form-label">Code Length</label>
-          <input type="number" class="form-control" id="codeLength" placeholder="Code Length" required>
+          <input type="number" name="codeLength" class="form-control" id="codeLength" placeholder="Code Length" required>
         </div>
         <div class="col-6">
           <label for="codeQuantity" class="form-label">Code Quantity</label>
-          <input type="number" class="form-control" id="codeQuantity" placeholder="Code Quantity" required>
+          <input type="number" name="codeQuantity" class="form-control" id="codeQuantity" placeholder="Code Quantity" required>
         </div>
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Start</button>
