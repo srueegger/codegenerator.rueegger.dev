@@ -1,4 +1,4 @@
-[![de](https://img.shields.io/badge/lang-de-red.svg)](https://github.com/srueegger/codegenerator.rueegger.dev/blob/main/README.de.md)
+[![de](https://img.shields.io/badge/lang-de-green.svg)](https://github.com/srueegger/codegenerator.rueegger.dev/blob/main/README.de.md)
 [![en](https://img.shields.io/badge/lang-en-green.svg)](https://github.com/srueegger/codegenerator.rueegger.dev/blob/main/README.md)
 
 # Code Generator
