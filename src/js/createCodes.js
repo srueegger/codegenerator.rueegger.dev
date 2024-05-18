@@ -29,7 +29,7 @@ const ModalWindow = async (formDataObj) => {
   /* Create Codes */
   const codes = await createUniqeCodes(formDataObj);
   /* Create Textfile */
-  const textContent = Array.from(codes).join('\n');
+  const textContent = Array.from(codes).join('\r\n');
   const textfileURL = createOutputFile(textContent, formDataObj.codeOutput);
   const downloadButton = document.getElementById('codeDownload');
   downloadButton.href = textfileURL;
