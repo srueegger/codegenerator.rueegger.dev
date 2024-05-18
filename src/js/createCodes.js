@@ -69,7 +69,6 @@ const updateModalProgress = (currentCodes, totalCodes) => {
 
 /* create textfile */
 const createOutputFile = (textContent, output) => {
-  console.log(output);
   let textFile;
   if(output == 'txt') {
     textFile = new Blob([textContent], { type: 'text/plain' });
