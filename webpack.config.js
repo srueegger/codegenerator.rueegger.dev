@@ -4,6 +4,7 @@ const path = require('path')
 const autoprefixer = require('autoprefixer')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -19,7 +20,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
-    new miniCssExtractPlugin()
+    new miniCssExtractPlugin(),
+    new FaviconsWebpackPlugin('./src/img/favicon.png')
   ],
   module: {
     rules: [
