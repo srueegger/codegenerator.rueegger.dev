@@ -1,3 +1,6 @@
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/srueegger/codegenerator.rueegger.dev/blob/main/README.md)
+[![de](https://img.shields.io/badge/lang-de-green.svg)](https://github.com/srueegger/codegenerator.rueegger.dev/blob/main/README.de.md)
+
 # Code Generator
 
 Code Generator is a small service website where users can generate unique codes. Users specify the code pattern (e.g., A-Z or 0-9 + A-Z, etc.), the number of characters a code should have, and the number of codes they need.
