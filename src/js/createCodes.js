@@ -30,10 +30,10 @@ const ModalWindow = async (formDataObj) => {
   const codes = await createUniqeCodes(formDataObj);
   /* Create Textfile */
   const textContent = Array.from(codes).join('\n');
-  const textfileURL = createTextFile(textContent);
+  const textfileURL = createOutputFile(textContent, formDataObj.codeOutput);
   const downloadButton = document.getElementById('codeDownload');
   downloadButton.href = textfileURL;
-  downloadButton.download = 'codes.txt';
+  downloadButton.download = 'codes.' + formDataObj.codeOutput;
   downloadButton.classList.remove('d-none');
 };
 
@@ -68,8 +68,18 @@ const updateModalProgress = (currentCodes, totalCodes) => {
 };
 
 /* create textfile */
-const createTextFile = (textContent) => {
-  const textFile = new Blob([textContent], { type: 'text/plain' });
-  const textFileURL = URL.createObjectURL(textFile);
-  return textFileURL;
+const createOutputFile = (textContent, output) => {
+  console.log(output);
+  let textFile;
+  if(output == 'txt') {
+    textFile = new Blob([textContent], { type: 'text/plain' });
+  } else if(output == 'csv') {
+    textFile = new Blob([textContent], { type: 'text/csv' });
+  }
+  if(textFile) {
+    const textFileURL = URL.createObjectURL(textFile);
+    return textFileURL;
+  } else {
+    throw new Error('Invalid Output Type');
+  }
 };

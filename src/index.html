@@ -16,7 +16,7 @@
         </div>
       </div>
       <form id="codeGeneratorForm" class="row g-3" method="post" action="">
-        <div class="col-12">
+        <div class="col-6">
           <label for="codePattern" class="form-label">Choose a code pattern</label>
           <select id="codePattern" name="codePattern" class="form-select" aria-label="Code Pattern" required>
             <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">A-Z</option>
@@ -26,6 +26,13 @@
             <option value="0123456789abcdefghijklmnopqrstuvwxyz">a-z 0-9</option>
             <option value="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ">A-Z a-z 0-9</option>
             <option value="23456789CFHJKLNPRTVX">Capital letters and numbers (without risk of confusion)</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="codeOutput" class="form-label">Choose the output format</label>
+          <select id="codeOutput" name="codeOutput" class="form-select" aria-label="Code Output" required>
+            <option value="txt">TXT-File</option>
+            <option value="csv">CSV-File</option>
           </select>
         </div>
         <div class="col-6">
