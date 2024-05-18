@@ -1,16 +1,6 @@
+/* Set own Bootstrap Variables */
+$progress-height: 2rem;
+$progress-font-size: 1.5rem;
+
 /* Import needed Bootstrap Modules */
-//@import "bootstrap/scss/bootstrap";
-
-@import "bootstrap/scss/mixins/banner";
-@include bsBanner(Reboot);
-
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/variables-dark";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/root";
-@import "bootstrap/scss/reboot";
-@import "bootstrap/scss/bootstrap-grid";
-@import "bootstrap/scss/buttons";
-@import "bootstrap/scss/forms";
+@import "bootstrap/scss/bootstrap";
