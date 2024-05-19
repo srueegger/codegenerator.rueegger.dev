@@ -1,5 +1,6 @@
 /* Modal Komponente von Bootstrap importieren */
 import { Modal } from 'bootstrap';
+import * as XLSX from 'xlsx';
 
 /* Intercept CodeGen Form Submit */
 const codeGenForm = document.getElementById('codeGeneratorForm');
@@ -37,6 +38,7 @@ const ModalWindow = async (formDataObj) => {
   downloadButton.classList.remove('d-none');
 };
 
+/* Creates unique Codes */
 const createUniqeCodes = async (formDataObj) => {
   const codes = new Set();
   while(codes.size < formDataObj.codeQuantity) {
@@ -48,6 +50,7 @@ const createUniqeCodes = async (formDataObj) => {
   return codes;
 };
 
+/* Creates a Code from a Pattern */
 const createCode = (length, patter) => {
   const charactersLength = patter.length;
   let code = '';
@@ -57,6 +60,7 @@ const createCode = (length, patter) => {
   return code;
 };
 
+/* Updates the progressbar in Modal Window */
 const updateModalProgress = (currentCodes, totalCodes) => {
   const progress = Math.floor((currentCodes / totalCodes) * 100);
   const progressBar = document.getElementById('dynamicProgressBar');
@@ -67,6 +71,14 @@ const updateModalProgress = (currentCodes, totalCodes) => {
   progressBar.textContent = `${progress}%`;
 };
 
+/* convert string to ArrayBuffer */
+const s2ab = (s) => {
+  const buf = new ArrayBuffer(s.length);
+  const view = new Uint8Array(buf);
+  for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+  return buf;
+}
+
 /* create textfile */
 const createOutputFile = (textContent, output) => {
   let textFile;
@@ -74,6 +86,15 @@ const createOutputFile = (textContent, output) => {
     textFile = new Blob([textContent], { type: 'text/plain' });
   } else if(output == 'csv') {
     textFile = new Blob([textContent], { type: 'text/csv' });
+  } else if(output == 'xlsx') {
+    /* Format Data */
+    const data = textContent.split(/\r?\n/).map(row => row.split(','));
+    /* Prepare XLSX-File */
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    const workbookBinary = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+    textFile = new Blob([s2ab(workbookBinary)], { type: 'application/octet-stream' });
   }
   if(textFile) {
     const textFileURL = URL.createObjectURL(textFile);
