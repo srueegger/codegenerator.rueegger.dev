@@ -21,6 +21,17 @@ if (codeGenForm) {
   });
 }
 
+/* Close Modal Windows after Download File */
+const closeModalAfterDownload = (progressModal) => {
+  const downloadButton = document.getElementById('codeDownload');
+  downloadButton.addEventListener('click', () => {
+    // Close the modal after a small delay to ensure the download starts
+    setTimeout(() => {
+      progressModal.hide();
+    }, 100);
+  });
+};
+
 /* open Modal Window */
 const ModalWindow = async (formDataObj) => {
   /* Prepare Modal */
@@ -45,6 +56,8 @@ const ModalWindow = async (formDataObj) => {
   downloadButton.href = textfileURL;
   downloadButton.download = 'codes.' + formDataObj.codeOutput;
   downloadButton.classList.remove('d-none');
+  /* Set up event listener to close modal after download */
+  closeModalAfterDownload(progressModal);
 };
 
 /* Creates unique Codes */
