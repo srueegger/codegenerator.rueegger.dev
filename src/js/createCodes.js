@@ -1,6 +1,13 @@
-/* Modal Komponente von Bootstrap importieren */
-import { Modal } from 'bootstrap';
-import * as XLSX from 'xlsx';
+/* Global Variables */
+let utils;
+let write;
+
+/* Function to load XLSX Library */
+const loadXlsx = async () => {
+  const xlsx = await import('xlsx');
+  utils = xlsx.utils;
+  write = xlsx.write;
+};
 
 /* Intercept CodeGen Form Submit */
 const codeGenForm = document.getElementById('codeGeneratorForm');
@@ -16,6 +23,8 @@ if (codeGenForm) {
 
 /* open Modal Window */
 const ModalWindow = async (formDataObj) => {
+  /* Prepare Modal */
+  const { Modal } = await import('bootstrap');
   const progressModal = new Modal(document.getElementById('progressModal'), {
     keyboard: false,
     backdrop: 'static'
@@ -31,7 +40,7 @@ const ModalWindow = async (formDataObj) => {
   const codes = await createUniqeCodes(formDataObj);
   /* Create Textfile */
   const textContent = Array.from(codes).join('\r\n');
-  const textfileURL = createOutputFile(textContent, formDataObj.codeOutput);
+  const textfileURL = await createOutputFile(textContent, formDataObj.codeOutput);
   const downloadButton = document.getElementById('codeDownload');
   downloadButton.href = textfileURL;
   downloadButton.download = 'codes.' + formDataObj.codeOutput;
@@ -80,20 +89,21 @@ const s2ab = (s) => {
 }
 
 /* create textfile */
-const createOutputFile = (textContent, output) => {
+const createOutputFile = async (textContent, output) => {
   let textFile;
   if(output == 'txt') {
     textFile = new Blob([textContent], { type: 'text/plain' });
   } else if(output == 'csv') {
     textFile = new Blob([textContent], { type: 'text/csv' });
   } else if(output == 'xlsx') {
+    await loadXlsx();
     /* Format Data */
     const data = textContent.split(/\r?\n/).map(row => row.split(','));
     /* Prepare XLSX-File */
-    const worksheet = XLSX.utils.aoa_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    const workbookBinary = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+    const worksheet = utils.aoa_to_sheet(data);
+    const workbook = utils.book_new();
+    utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    const workbookBinary = write(workbook, { bookType: 'xlsx', type: 'binary' });
     textFile = new Blob([s2ab(workbookBinary)], { type: 'application/octet-stream' });
   }
   if(textFile) {
