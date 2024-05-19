@@ -5,7 +5,7 @@
 
 Code Generator ist eine kleine Service-Website, auf der Benutzer eindeutige Codes generieren können. Benutzer geben das Code-Muster an (z.B. A-Z oder 0-9 + A-Z usw.), die Anzahl der Zeichen, die ein Code haben soll, und die Anzahl der Codes, die sie benötigen.
 
-Diese werden dann on-the-fly generiert und der Benutzer kann sie als txt, csv oder xls herunterladen.
+Diese werden dann on-the-fly generiert und der Benutzer kann sie als txt, csv oder xlsx herunterladen.
 
 ## Erste Schritte
 
