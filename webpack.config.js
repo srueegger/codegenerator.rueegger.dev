@@ -10,7 +10,7 @@ module.exports = {
   mode: 'development',
   entry: './src/js/main.js',
   output: {
-    filename: 'main.js',
+    filename: 'main.[contenthash].js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
