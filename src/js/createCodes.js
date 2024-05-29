@@ -64,7 +64,13 @@ const ModalWindow = async (formDataObj) => {
 const createUniqeCodes = async (formDataObj) => {
   const codes = new Set();
   while(codes.size < formDataObj.codeQuantity) {
-    const code = createCode(formDataObj.codeLength, formDataObj.codePattern);
+    let code = createCode(formDataObj.codeLength, formDataObj.codePattern);
+    /* Check if URL Field is enabled */
+    if (formDataObj.addURL) {
+      let set_complete_url = formDataObj.codeURL + code;
+      /* Modify Code */
+      code = code + ',' + set_complete_url;
+    }
     codes.add(code);
     await new Promise(resolve => setTimeout(resolve, 0));
     updateModalProgress(codes.size, formDataObj.codeQuantity);
