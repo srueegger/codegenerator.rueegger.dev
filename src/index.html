@@ -45,6 +45,16 @@
           <label for="codeQuantity" class="form-label">Code Quantity</label>
           <input type="number" name="codeQuantity" class="form-control" id="codeQuantity" placeholder="Code Quantity" required>
         </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="addURL" name="addURL">
+            <label class="form-check-label" for="addURL">Eine URL hinzufügen</label>
+          </div>
+        </div>
+        <div id="urlField" class="col-12 col-md-6 d-none">
+          <label for="codeURL" class="form-label">URL</label>
+          <input type="url" name="codeURL" class="form-control" id="codeURL" placeholder="https://url.tld/?code=">
+        </div>
         <div class="col-12 text-center">
           <button type="submit" class="btn btn-primary btn-lg w-25">Start</button>
         </div>
