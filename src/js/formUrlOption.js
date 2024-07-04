@@ -1,19 +1,21 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  const urlCheckboxField = document.getElementById('addURL');
-  if (urlCheckboxField) {
+  const urlCheckboxFields = document.querySelectorAll('.js_show_hide_field');
+  urlCheckboxFields.forEach((urlCheckboxField) => {
     urlCheckboxField.addEventListener('change', () => {
-      const urlField = document.getElementById('urlField');
-      if (urlField) {
+      const show_hide_field = urlCheckboxField.getAttribute('data-change');
+      console.log(show_hide_field);
+      const field = document.querySelector(show_hide_field);
+      if (field) {
         if (urlCheckboxField.checked) {
-          urlField.classList.remove('d-none');
+          field.classList.remove('d-none');
           /* Set Field to required */
-          urlField.querySelector('input').setAttribute('required', '');
+          field.querySelector('input').setAttribute('required', '');
         } else {
-          urlField.classList.add('d-none');
+          field.classList.add('d-none');
           /* Remove required attribute */
-          urlField.querySelector('input').removeAttribute('required');
+          field.querySelector('input').removeAttribute('required');
         }
       }
     });
-  }
+  });
 });
