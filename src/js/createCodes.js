@@ -62,7 +62,26 @@ const ModalWindow = async (formDataObj) => {
 
 /* Creates unique Codes */
 const createUniqeCodes = async (formDataObj) => {
+  /* Prüfen ob eine Datei hochgeladen wurde */
   const codes = new Set();
+  if(formDataObj.addFileField) {
+    await new Promise((resolve, reject) => {
+      const file = document.getElementById('addFileField').files[0];
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = function() {
+        const fileLines = reader.result.split(/\r?\n/);
+        fileLines.forEach((line) => {
+          const splitLine = line.split(',');
+          codes.add(splitLine[0]);
+        });
+        /* Code Quantity neu berechnen */
+        formDataObj.codeQuantity = parseInt(formDataObj.codeQuantity) + parseInt(codes.size);
+        resolve();
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  }
   while(codes.size < formDataObj.codeQuantity) {
     let code = createCode(formDataObj.codeLength, formDataObj.codePattern);
     /* Check if URL Field is enabled */
