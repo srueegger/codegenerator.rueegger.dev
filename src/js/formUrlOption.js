@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   urlCheckboxFields.forEach((urlCheckboxField) => {
     urlCheckboxField.addEventListener('change', () => {
       const show_hide_field = urlCheckboxField.getAttribute('data-change');
-      console.log(show_hide_field);
       const field = document.querySelector(show_hide_field);
       if (field) {
         if (urlCheckboxField.checked) {
