@@ -16,7 +16,7 @@
           <p>You can download the codes as a TXT, CSV or Microsoft Excel file.</p>
         </div>
       </div>
-      <form id="codeGeneratorForm" class="row g-3" method="post" action="">
+      <form id="codeGeneratorForm" enctype="multipart/form-data" class="row g-3" method="post" action="">
         <div class="col-12 col-md-6">
           <label for="codePattern" class="form-label">Choose a code pattern</label>
           <select id="codePattern" name="codePattern" class="form-select" aria-label="Code Pattern" required>
@@ -47,13 +47,23 @@
         </div>
         <div class="col-12">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="addURL" value="1" name="addURL">
+            <input class="form-check-input js_show_hide_field" data-change="#urlField" type="checkbox" id="addURL" value="1" name="addURL">
             <label class="form-check-label" for="addURL">Add a URL</label>
           </div>
         </div>
         <div id="urlField" class="col-12 col-md-6 d-none">
           <label for="codeURL" class="form-label">URL</label>
           <input type="url" name="codeURL" class="form-control" id="codeURL" placeholder="https://url.tld/?code=">
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input js_show_hide_field" data-change="#fileField" type="checkbox" id="addFile" value="1" name="addURL">
+            <label class="form-check-label" for="addFile">Add a File</label>
+          </div>
+        </div>
+        <div id="fileField" class="col-12 col-md-6 d-none">
+          <label for="addFileField" class="form-label">Datei hinzufügen</label>
+          <input type="file" accept=".txt" name="addFileField" class="form-control" id="addFileField">
         </div>
         <div class="col-12 text-center">
           <button type="submit" class="btn btn-primary btn-lg w-25">Start</button>
