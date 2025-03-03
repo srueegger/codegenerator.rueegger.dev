@@ -64,7 +64,7 @@ const ModalWindow = async (formDataObj) => {
 const createUniqeCodes = async (formDataObj) => {
   /* Prüfen ob eine Datei hochgeladen wurde */
   const codes = new Set();
-  if(formDataObj.addFileField) {
+  if(formDataObj.addFileField instanceof File && formDataObj.addFileField.name != '') {
     await new Promise((resolve, reject) => {
       const file = document.getElementById('addFileField').files[0];
       const reader = new FileReader();
