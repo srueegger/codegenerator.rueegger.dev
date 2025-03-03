@@ -64,7 +64,7 @@ const ModalWindow = async (formDataObj) => {
 const createUniqeCodes = async (formDataObj) => {
   /* Prüfen ob eine Datei hochgeladen wurde */
   const codes = new Set();
-  if(formDataObj.addFileField instanceof File && formDataObj.addFileField.name != '') {
+  if(formDataObj.addFileField instanceof File && formDataObj.addFileField.name !== '') {
     await new Promise((resolve, reject) => {
       const file = document.getElementById('addFileField').files[0];
       const reader = new FileReader();
@@ -93,7 +93,7 @@ const createUniqeCodes = async (formDataObj) => {
     codes.add(code);
     await new Promise(resolve => setTimeout(resolve, 0));
     updateModalProgress(codes.size, formDataObj.codeQuantity);
-  };
+  }
   return codes;
 };
 
@@ -129,11 +129,11 @@ const s2ab = (s) => {
 /* create textfile */
 const createOutputFile = async (textContent, output) => {
   let textFile;
-  if(output == 'txt') {
+  if(output === 'txt') {
     textFile = new Blob([textContent], { type: 'text/plain' });
-  } else if(output == 'csv') {
+  } else if(output === 'csv') {
     textFile = new Blob([textContent], { type: 'text/csv' });
-  } else if(output == 'xlsx') {
+  } else if(output === 'xlsx') {
     await loadXlsx();
     /* Format Data */
     const data = textContent.split(/\r?\n/).map(row => row.split(','));
@@ -145,8 +145,7 @@ const createOutputFile = async (textContent, output) => {
     textFile = new Blob([s2ab(workbookBinary)], { type: 'application/octet-stream' });
   }
   if(textFile) {
-    const textFileURL = URL.createObjectURL(textFile);
-    return textFileURL;
+    return URL.createObjectURL(textFile);
   } else {
     throw new Error('Invalid Output Type');
   }
